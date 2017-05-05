@@ -113,5 +113,10 @@ ctx.body = payload;
 我们给开发者提供了 cli 命令，用于本地发起请求
 
 ```bash
-$ node ./node_modules/.bin/maga-cli --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --host="http://localhost:7001" '{"service":"/api/csbiz.account.findUserById?ver=1.0.0","data":{"uid":"tz"}}'
+$ maga-cli request <payload>
+$ maga-cli encode <payload>
+```
+
+```bash
+$ node ./node_modules/.bin/maga-cli --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --host="http://localhost:7001" request'{"service":"/api/csbiz.account.findUserById?ver=1.0.0","data":{"uid":"tz"}}'
 ```
