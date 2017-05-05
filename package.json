@@ -1,6 +1,6 @@
 {
   "name": "@aligames/maga-open",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "maga sdk for gameopen protocol",
   "dependencies": {
     "agentkeepalive": "^3.1.0",
@@ -21,6 +21,7 @@
     "eslint": "^3.19.0",
     "eslint-config-egg": "^3.2.0",
     "mm": "^2.1.0",
+    "mz-modules": "^1.0.0",
     "webstorm-disable-index": "^1.1.2"
   },
   "main": "index.js",

@@ -46,10 +46,11 @@ const client = new Sdk.Client({
   // timeout: 5000, // 超时时间，默认为 5000ms
   // required: true, // 遇到错误时，直接抛错还是返回错误对象，便于组合请求，默认为 true - 抛错
   // prefix: 'MAGA',
+  // logfile: 'path/to/log/file',
   // logger: my_custom_logger,
 });
 
-const result = yield client.requst({
+const result = yield client.request({
   // API 名称，必须用 / 开头
   service: '/api/xxx',
   // 请求的数据体
@@ -66,8 +67,8 @@ console.log(result.data);
 
 ```js
 const result = yield {
-  api1: client.requst({ service: '/api/xxx', data: { uid: 'tz' } }),
-  api2: client.requst({ service: '/api/yyy' }),
+  api1: client.request({ service: '/api/xxx', data: { uid: 'tz' } }),
+  api2: client.request({ service: '/api/yyy' }),
 };
 
 const data = {};
@@ -80,15 +81,58 @@ console.log(result.api1.data);
 console.log(data);
 ```
 
+错误处理：
+
+```js
+try {
+  const result = yield client.request({
+    service: '/api/xxx',
+    data: {
+      uid: 'tz',
+    },
+  });
+} catch (err) {
+  // { message, code, data }
+  console.error(err);
+}
+```
+
+对特定请求配置：
+
+```js
+const config = {
+  // API 名称，必须用 / 开头
+  service: '/api/xxx',
+  // 请求的数据体
+  data: {
+    uid: 'tz',
+  },
+};
+
+const result = yield client.request(config, {
+  timeout: 100000,
+  required: false,
+});
+
+// api1 是关键请求，失败了则整个失败，而 api2 请失败时，不会报错，此时 result.api2 是 error 对象
+const combo = yield {
+  api1: client.request({ service: '/api/xxx', data: { uid: 'tz' } }),
+  api2: client.request({ service: '/api/yyy' }, { required: false }),
+};
+```
+
 ### 作为服务提供方，提供接口服务
 
 ```js
 const Sdk = require('@aligames/maga-open');
 const server = new Sdk.Server({
   // 允许访问的 app key 和 secret 值对
-  keystore: {},
+  keystore: {
+    '<your_app_key>': '<your_app_secret>',
+  },
   // level: 'INFO',
   // prefix: 'MAGA SERVER',
+  // logfile: 'path/to/log/file',
   // logger: my_custom_logger,
 });
 
@@ -98,25 +142,55 @@ const body = server.decode({ meta: ctx.headers, payload: rawBody });
 // 进行业务逻辑处理，如查询数据库
 const result = { uid: 'tz', from: 'server' };
 
-// 对返回结果进行封包
-const { meta, payload } = server.response({ id: id || Date.now(), code, msg, result });
+try {
+  // 对返回结果进行封包
+  const { meta, payload } = server.response({ id: id || Date.now(), code, msg, result });
 
-// 返回 headers
-ctx.set(meta);
+  // 返回 headers
+  ctx.set(meta);
 
-// 返回请求体，buffer
-ctx.body = payload;
+  // 返回请求体，buffer
+  ctx.body = payload;
+
+} catch (err) {
+  // 需要自己处理报错后的返回
+  ctx.status = err.code;
+  ctx.body = err;
+}
 ```
 
 ### 调试
 
-我们给开发者提供了 cli 命令，用于本地发起请求
+我们给开发者提供了 cli 命令，用于本地发起请求。
 
 ```bash
-$ maga-cli request <payload>
-$ maga-cli encode <payload>
+$ maga-cli request --key=<key> --secret=<secret> <payload json string>
+$ maga-cli encode --key=<key> --secret=<secret>  <payload json string>
+$ maga-cli decode --key=<key> --secret=<secret>  <payload base64 string>
 ```
 
+示例：
+
 ```bash
-$ node ./node_modules/.bin/maga-cli --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --host="http://localhost:7001" request'{"service":"/api/csbiz.account.findUserById?ver=1.0.0","data":{"uid":"tz"}}'
+$ node ./node_modules/.bin/maga-cli --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --host="http://localhost:7001" request '{"service":"/api/csbiz.account.findUserById?ver=1.0.0","data":{"uid":"tz"}}'
+
+$ node bin/maga-cli.js --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --host="http://100.84.254.233:7001" decode 'Rn+Cek0ATDXYJvkDxgiJ20+wRP4XdvFKcp4XXePyj+R83W9H+yct6LEIzrlP9cw6tohaF1a1AhcXnayIv+TfY18Kr7uJ8v9mdDBx1Efc3BUtDS3LJzW3BBhXBYeQ5C0B'
 ```
+
+### 质量
+
+单元测试覆盖率：
+
+```bash
+=============================== Coverage summary ===============================
+Statements   : 100% ( 190/190 )
+Branches     : 100% ( 80/80 )
+Functions    : 100% ( 19/19 )
+Lines        : 100% ( 188/188 )
+================================================================================
+```
+
+## 反馈
+
+- 联系接口同学
+- 或提交 [Issue](https://github.com/aliplay-team/maga-client-nodejs-open/issues)

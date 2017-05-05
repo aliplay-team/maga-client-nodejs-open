@@ -5,10 +5,10 @@
 const argv = require('minimist')(process.argv.slice(2));
 const co = require('co');
 const chalk = require('chalk');
-const commands = [ 'request', 'encode' ];
+const commands = [ 'request', 'encode', 'decode' ];
 
 if (argv.h || argv.help || !argv.key || !argv.secret || !commands.includes(argv._[0])) {
-  console.log('Usage: maga-cli --key=<key> --secret=<secret> --host=[host] --level=INFO [request/encode] <payload>');
+  console.log(`Usage: maga-cli --key=<key> --secret=<secret> --host=[host] --level=INFO [${commands.join('/')}] <payload>`);
   process.exit(1);
 }
 
@@ -41,16 +41,29 @@ function* encode(config) {
   });
 }
 
+function* decode(payload) {
+  const result = maga.protocol.decode({
+    payload,
+    key: argv.key,
+    secret: argv.secret,
+  });
+  console.log(`${chalk.bold.blue('result:')}\n${JSON.stringify(result, null, 2).replace(/^/gm, '  ')}`);
+}
+
 co(function* () {
   const [ command, payload ] = argv._;
-  const config = JSON.parse(payload);
+
   switch (command) {
     case 'request':
-      yield request(config);
+      yield request(JSON.parse(payload));
       break;
 
     case 'encode':
-      yield encode(config);
+      yield encode(JSON.parse(payload));
+      break;
+
+    case 'decode':
+      yield decode(payload);
       break;
 
     default:
