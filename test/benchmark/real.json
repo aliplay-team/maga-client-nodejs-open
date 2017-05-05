@@ -1,0 +1,107 @@
+{
+  "id": "1332396785551",
+  "state": {
+    "code": 2000000,
+    "msg": "操作成功"
+  },
+  "data": [
+    {
+      "id": 1,
+      "gifting": 10,
+      "name": "游戏名称：1",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 2,
+      "gifting": 10,
+      "name": "游戏名称：2",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 3,
+      "gifting": 10,
+      "name": "游戏名称：3",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 4,
+      "gifting": 10,
+      "name": "游戏名称：4",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 5,
+      "gifting": 10,
+      "name": "游戏名称：5",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 6,
+      "gifting": 10,
+      "name": "游戏名称：6",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 7,
+      "gifting": 10,
+      "name": "游戏名称：7",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 8,
+      "gifting": 10,
+      "name": "游戏名称：8",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 9,
+      "gifting": 10,
+      "name": "游戏名称：9",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    },
+    {
+      "id": 10,
+      "gifting": 10,
+      "name": "游戏名称：10",
+      "category": "单机类",
+      "hasSvr": true,
+      "svrUrl": "http://assistant.9game.cn/svrUrl",
+      "logourl": "http://image.9game.cn/xxx.jpg"
+    }
+  ],
+  "page": {
+    "size": 10,
+    "currPage": 1,
+    "totalPage": 4,
+    "total": 33,
+    "pageCount": 10,
+    "nextPage": 2
+  }
+}

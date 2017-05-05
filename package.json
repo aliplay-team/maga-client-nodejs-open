@@ -1,0 +1,54 @@
+{
+  "name": "@aligames/maga-open",
+  "version": "0.5.0",
+  "description": "maga sdk for gameopen protocol",
+  "dependencies": {
+    "agentkeepalive": "^3.1.0",
+    "chalk": "^1.1.3",
+    "co": "^4.6.0",
+    "egg-logger": "^1.6.0",
+    "is-type-of": "^1.0.0",
+    "md5": "^2.2.1",
+    "minimist": "^1.2.0",
+    "urllib": "^2.22.0"
+  },
+  "devDependencies": {
+    "assert-extends": "^1.0.1",
+    "autod": "^2.8.0",
+    "beautify-benchmark": "^0.2.4",
+    "benchmark": "^2.1.4",
+    "egg-bin": "^3.3.2",
+    "egg-ci": "^1.6.0",
+    "eslint": "^3.19.0",
+    "eslint-config-egg": "^3.2.0",
+    "mm": "^2.1.0",
+    "webstorm-disable-index": "^1.1.2"
+  },
+  "main": "index.js",
+  "bin": {
+    "maga-cli": "bin/maga-cli.js"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "autod": "autod",
+    "lint": "eslint .",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "ci": "npm run lint && npm run cov",
+    "benchmark": "node test/benchmark/protocol.js",
+    "pkgfiles": "egg-bin pkgfiles"
+  },
+  "ci": {
+    "version": "6, 7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aliplay-team/maga-client-nodejs-open.git"
+  },
+  "homepage": "https://github.com/aliplay-team/maga-client-nodejs-open",
+  "author": "TZ <liuyong.ly3@alibaba-inc.com>",
+  "license": "MIT"
+}
