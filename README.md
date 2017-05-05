@@ -179,6 +179,16 @@ $ node bin/maga-cli.js --key=ngclient#2dcd --secret=wqjx0iXcRw2uEXdmjlruzw003 --
 
 ### 质量
 
+我们的类库严格遵循 [Semver 版本规则](http://semver.org/lang/zh-CN/)，故强烈建议开发者通过 `^` 的方式引入，即:
+
+```json
+{
+  "dependencies": {
+    "@aligames/maga-open": "^1.0.0"
+  }
+}
+```
+
 单元测试覆盖率：
 
 ```bash
@@ -189,6 +199,14 @@ Functions    : 100% ( 19/19 )
 Lines        : 100% ( 188/188 )
 ================================================================================
 ```
+
+### 服务端开发
+
+参见示例： https://github.com/aliplay-team/maga-client-nodejs-open-example
+
+推荐使用我们开源的『企业级的 Node.js Web 基础框架』 - eggjs
+- 官方地址：https://eggjs.org/
+- 介绍：https://zhuanlan.zhihu.com/p/25860846
 
 ## 反馈
 
