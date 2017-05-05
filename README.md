@@ -11,12 +11,12 @@
 
 [npm-image]: https://img.shields.io/npm/v/@aligames/maga-open.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@aligames/maga-open
-[travis-image]: https://img.shields.io/travis/{{org}}/@aligames/maga-open.svg?style=flat-square
-[travis-url]: https://travis-ci.org/{{org}}/@aligames/maga-open
-[codecov-image]: https://codecov.io/gh/{{org}}/@aligames/maga-open/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/{{org}}/@aligames/maga-open
-[david-image]: https://img.shields.io/david/{{org}}/@aligames/maga-open.svg?style=flat-square
-[david-url]: https://david-dm.org/{{org}}/@aligames/maga-open
+[travis-image]: https://img.shields.io/travis/aliplay-team/maga-client-nodejs-open.svg?style=flat-square
+[travis-url]: https://travis-ci.org/aliplay-team/maga-client-nodejs-open
+[codecov-image]: https://codecov.io/gh/aliplay-team/maga-client-nodejs-open/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/aliplay-team/maga-client-nodejs-open/maga-open
+[david-image]: https://img.shields.io/david/aliplay-team/maga-client-nodejs-open.svg?style=flat-square
+[david-url]: https://david-dm.org/aliplay-team/maga-client-nodejs-open
 [snyk-image]: https://snyk.io/test/npm/@aligames/maga-open/badge.svg?style=flat-square
 [snyk-url]: https://snyk.io/test/npm/@aligames/maga-open
 [download-image]: https://img.shields.io/npm/dm/@aligames/maga-open.svg?style=flat-square

@@ -4,7 +4,6 @@
 
 const Sdk = require('..');
 const assert = require('assert');
-const mm = require('mm');
 const path = require('path');
 const rimraf = require('mz-modules/rimraf');
 const sleep = require('mz-modules/sleep');
