@@ -36,6 +36,9 @@ npm i @aligames/maga-open --save
 
 ### 作为消费者，发起请求
 
+- 通过 `new Sdk.Client({ key, secret })` 进行初始化，需要提供 `key`，`secret` 配置。
+- 使用 `yield client.request({ service, data, options })` 来封包，发送请求给服务端，以及解析服务端返回数据。
+
 ```js
 const Sdk = require('@aligames/maga-open');
 const client = new Sdk.Client({
@@ -123,6 +126,10 @@ const combo = yield {
 
 ### 作为服务提供方，提供接口服务
 
+- 通过 `new Sdk.Server({ keystore })` 进行初始化，需要提供 `keystore` 配置。
+- 使用 `server.decode({ meta, payload })` 解析客户端传递过来的请求体，解析出错会抛错，请注意 `try catch` 处理。
+- 使用 `server.response({ result, id, code, msg })` 对响应数据进行封包，返回 `{ meta, payload }` 供开发者使用，前者用于配置 headers，后者是 buffer 直接返回给对端。
+
 ```js
 const Sdk = require('@aligames/maga-open');
 const server = new Sdk.Server({
@@ -136,7 +143,7 @@ const server = new Sdk.Server({
   // logger: my_custom_logger,
 });
 
-// 获取客户端发送的请求对象，需传递 headers 和 req body buffer，进行解码
+// 获取客户端发送的请求对象，需传递 headers 和 req body buffer，进行解码，解析出错会抛错，请注意 `try catch` 处理。
 const body = server.decode({ meta: ctx.headers, payload: rawBody });
 
 // 进行业务逻辑处理，如查询数据库
