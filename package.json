@@ -1,6 +1,6 @@
 {
   "name": "@aligames/maga-open",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "maga sdk for gameopen protocol",
   "dependencies": {
     "agentkeepalive": "^3.1.0",
