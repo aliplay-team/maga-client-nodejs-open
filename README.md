@@ -32,6 +32,16 @@
 npm i @aligames/maga-open --save
 ```
 
+我们的类库严格遵循 [Semver 版本规则](http://semver.org/lang/zh-CN/)，故强烈建议开发者通过 `^` 的方式引入，即:
+
+```json
+{
+  "dependencies": {
+    "@aligames/maga-open": "^1.0.0"
+  }
+}
+```
+
 ## 使用方法
 
 ### 作为消费者，发起请求
@@ -143,13 +153,14 @@ const server = new Sdk.Server({
   // logger: my_custom_logger,
 });
 
-// 获取客户端发送的请求对象，需传递 headers 和 req body buffer，进行解码，解析出错会抛错，请注意 `try catch` 处理。
-const body = server.decode({ meta: ctx.headers, payload: rawBody });
-
-// 进行业务逻辑处理，如查询数据库
-const result = { uid: 'tz', from: 'server' };
 
 try {
+  // 获取客户端发送的请求对象，需传递 headers 和 req body buffer，进行解码，解析出错会抛错，请注意 `try catch` 处理。
+  const body = server.decode({ meta: ctx.headers, payload: rawBody });
+
+  // 进行业务逻辑处理，如查询数据库
+  const result = yield ctx.service.user.find({ uid: body.uid, from: 'server' });
+
   // 对返回结果进行封包
   const { meta, payload } = server.response({ id: id || Date.now(), code, msg, result });
 
