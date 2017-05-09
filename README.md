@@ -139,6 +139,10 @@ const combo = yield {
 - 通过 `new Sdk.Server({ keystore })` 进行初始化，需要提供 `keystore` 配置。
 - 使用 `server.decode({ meta, payload })` 解析客户端传递过来的请求体，解析出错会抛错，请注意 `try catch` 处理。
 - 使用 `server.response({ result, id, code, msg })` 对响应数据进行封包，返回 `{ meta, payload }` 供开发者使用，前者用于配置 headers，后者是 buffer 直接返回给对端。
+  - `code` 是 API 层的状态码，如 `API 找不到，返回 404`，`没有权限，keystore 校验失败，返回 403`，等等。
+  - `result` 节点为业务结果，数据一般为 `{ data: {}, state: { code, message }}`
+  - 注意： result.state.code 和上面提到的 state 不一样，是业务的状态码
+
 
 ```js
 const Sdk = require('@aligames/maga-open');
