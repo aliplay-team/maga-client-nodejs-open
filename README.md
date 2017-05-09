@@ -61,6 +61,7 @@ const client = new Sdk.Client({
   // prefix: 'MAGA',
   // logfile: 'path/to/log/file',
   // logger: my_custom_logger,
+  // simplify: false // 配置为 true 的时候，会简化返回的结果，推荐配置，详见下文
 });
 
 const result = yield client.request({
@@ -72,8 +73,8 @@ const result = yield client.request({
   },
 });
 
-// 返回的对象中，包含 { id, data, state, headers }
-console.log(result.data);
+// 返回的服务端响应
+console.log(result);
 ```
 
 并发组合请求：
@@ -84,14 +85,8 @@ const result = yield {
   api2: client.request({ service: '/api/yyy' }),
 };
 
-const data = {};
-Object.keys(result).forEach(key => data[key] = result[key].data);
-
 // 返回的对象中，包含 { api1: {}, api2: {} }
-console.log(result.api1.data);
-
-// 提取出所有 data
-console.log(data);
+console.log(result);
 ```
 
 错误处理：
@@ -132,6 +127,34 @@ const combo = yield {
   api1: client.request({ service: '/api/xxx', data: { uid: 'tz' } }),
   api2: client.request({ service: '/api/yyy' }, { required: false }),
 };
+```
+
+对响应结果进行简化处理：
+
+```js
+// 网关返回的数据结构为: `{ id, code, message, result }`
+// 其中 code 和 message 是网关层的响应，代码执行到此次，已经代表网关层响应是正常的了，故这几个字段对应用层的业务处理没啥用
+// 为了方便业务应用开发者，我们在这里做下简化处理，仅把 result 节点的数据进行处理返回，即 `{ id, data, state, headers }`，其中 data 和 state 分别是 result.data 和 result.state 。
+
+const Sdk = require('@aligames/maga-open');
+const client = new Sdk.Client({
+  key: '<your_app_key>',
+  secret: '<your_app_secret>',
+
+  // 配置为 true 的时候，会简化返回的结果，推荐配置
+  simplify: true,
+});
+
+const result = yield client.request({
+  service: '/api/xxx',
+  data: {
+    uid: 'tz',
+  },
+});
+
+// 返回简化后的数据，包含 { id, data, state, headers }
+console.log(result.data);
+console.log(result.state);
 ```
 
 ### 作为服务提供方，提供接口服务

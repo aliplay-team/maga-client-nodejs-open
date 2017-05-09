@@ -142,6 +142,7 @@ describe('test/index.test.js', () => {
       key,
       secret,
       host: localServer,
+      simplify: true,
       // level: 'DEBUG',
     });
   });
@@ -196,7 +197,7 @@ describe('test/index.test.js', () => {
   });
 
   it('should response with another client', function* () {
-    const client2 = new Sdk.Client({ key: 'test', secret: 'my-test-secret', host: localServer });
+    const client2 = new Sdk.Client({ key: 'test', secret: 'my-test-secret', host: localServer, simplify: true });
     const result = yield client2.request({ service: '/mock/response/keystore', id: '123' });
     const { id, state, data, headers } = result;
     assert(id === '123');
@@ -204,6 +205,20 @@ describe('test/index.test.js', () => {
     assert(state.code === 200);
     assert(data.from === 'server');
     assert(headers[ 'x-mg-appkey' ] === 'test');
+  });
+
+  it('should response without simplify', function* () {
+    const client2 = new Sdk.Client({ key: 'test', secret: 'my-test-secret', host: localServer });
+    const response = yield client2.request({ service: '/mock/response/keystore', id: '123' });
+    const { id, code, message, result, headers } = response;
+    const { state, data } = result;
+    assert(id === '123');
+    assert(message === '业务执行成功');
+    assert(code === 200);
+    assert(state.msg === 'suc');
+    assert(state.code === 200);
+    assert(data.from === 'server');
+    assert(headers['x-mg-appkey'] === 'test');
   });
 
   it('should decode at server', () => {
