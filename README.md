@@ -14,7 +14,7 @@
 [travis-image]: https://img.shields.io/travis/aliplay-team/maga-client-nodejs-open.svg?style=flat-square
 [travis-url]: https://travis-ci.org/aliplay-team/maga-client-nodejs-open
 [codecov-image]: https://codecov.io/gh/aliplay-team/maga-client-nodejs-open/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/aliplay-team/maga-client-nodejs-open/maga-open
+[codecov-url]: https://codecov.io/gh/aliplay-team/maga-client-nodejs-open
 [david-image]: https://img.shields.io/david/aliplay-team/maga-client-nodejs-open.svg?style=flat-square
 [david-url]: https://david-dm.org/aliplay-team/maga-client-nodejs-open
 [snyk-image]: https://snyk.io/test/npm/@aligames/maga-open/badge.svg?style=flat-square
